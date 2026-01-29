@@ -8,7 +8,10 @@ int main()
 	cout << "Enter the value of P: ";
 	cin >> P;
 
-	cout << floor(log10(P)) + 1;
-
+	if (P >= 0)
+		cout << floor(log10(P)) + 1;
+	else
+		cout << floor(log10(-P)) + 1;
+	
 	return 0;
 }
