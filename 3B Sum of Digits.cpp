@@ -1,15 +1,12 @@
 #include <iostream>
 using namespace std;
 
-void rec(int N)
+int rec(int N)
 {
-	if (N == 1)
-		cout << "1 ";
+	if (N == 0)
+		return 0;
 	else
-	{
-		cout << N << " ";
-		return rec(N - 1);
-	}
+		return (N % 10) + rec(N / 10);
 }
 
 int main()
@@ -17,7 +14,6 @@ int main()
 	int N;
 	cout << "Enter N: ";
 	cin >> N;
-	rec(N);
-
+	cout << rec(N);
 	return 0;
 }
