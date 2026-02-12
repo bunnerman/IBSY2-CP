@@ -2,22 +2,23 @@
 #include <vector>
 using namespace std;
 
-void f(vector<int> &v, int n, int i, int sum, int target, vector<int> &subset)
+void arraySubsetFn(vector<int> &v, int n, int i, int sum, int target, vector<int> &subset)
 {
     if (i == n)
     {
         if (sum == target)
         {
-            for (int x : subset) cout << x << " ";
+            for (int i = 0; i < subset.size(); i++)
+    			cout << subset[i] << " ";
             cout << "\n";
         }
         return;
     }
 
     subset.push_back(v[i]);
-    f(v, n, i + 1, sum + v[i], target, subset);
+    arraySubsetFn(v, n, i + 1, sum + v[i], target, subset);
     subset.pop_back();
-    f(v, n, i + 1, sum, target, subset);
+    arraySubsetFn(v, n, i + 1, sum, target, subset);
 }
 
 int main()
@@ -41,5 +42,5 @@ int main()
     }
 
     vector<int> subset;
-    f(ary, n, 0, 0, target, subset);
+    arraySubsetFn(ary, n, 0, 0, target, subset);
 }
