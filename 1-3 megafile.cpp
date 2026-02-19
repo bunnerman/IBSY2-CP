@@ -340,28 +340,48 @@ int main()
 }
 
 #include <iostream>
-#include <string>
+#include <vector>
 using namespace std;
 
-void nPrStringRecursive(string *s, int l, int r) 
+void arraySubsetFn(vector<int> &v, int n, int i, int sum, int target, vector<int> &subset)
 {
-    if (l == r) 
-	{
-        cout << *s << "\n";
+    if (i == n)
+    {
+        if (sum == target)
+        {
+            for (int i = 0; i < subset.size(); i++)
+    			cout << subset[i] << " ";
+            cout << "\n";
+        }
         return;
     }
-    for (int i = l; i <= r; i++) 
-	{
-        swap((*s)[l], (*s)[i]);
-        nPrStringRecursive(s, l + 1, r);
-		swap((*s)[l], (*s)[i]);
-    }
+
+    subset.push_back(v[i]);
+    arraySubsetFn(v, n, i + 1, sum + v[i], target, subset);
+    subset.pop_back();
+    arraySubsetFn(v, n, i + 1, sum, target, subset);
 }
 
 int main()
 {
-	string customStr;
-	cout << "Enter string: ";
-	cin >> customStr;
-	nPrStringRecursive(&customStr, 0, customStr.length() - 1);
+    int n;
+	int t;
+	int target;
+
+    cout << "Number of Elements?: ";
+    cin >> n;
+
+    cout << "Target Sum: ";
+    cin >> target;
+
+    vector<int> ary;
+    cout << "Enter " << n << " elements: ";
+    for (int i = 0; i < n; i++)
+    {
+        cin >> t;
+        ary.push_back(t);
+    }
+
+    vector<int> subset;
+    arraySubsetFn(ary, n, 0, 0, target, subset);
 }
